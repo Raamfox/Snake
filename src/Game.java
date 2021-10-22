@@ -19,5 +19,7 @@ public class Game {
         window.setSize(width * dimension, height * dimension);
         window.setVisible(true);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //poop
+
     }
 }
