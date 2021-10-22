@@ -4,12 +4,12 @@ import java.util.ArrayList;
 public class Snake {
     private ArrayList<Rectangle> body;
 
-      private int w = Game.width;
+    private int w = Game.width;
     private int h = Game.height;
     private int d = Game.dimension;
 
 
-    //initialisera Snake
+    //initialize Snake
 
     public Snake () {
         body = new ArrayList<>();
