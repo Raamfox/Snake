@@ -30,6 +30,7 @@ public class Snake {
     public void setBody(ArrayList<Rectangle> body) {
         this.body = body;
     }
+    //hej
 
 
 }
