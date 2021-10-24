@@ -12,6 +12,8 @@ public class Game {
     public static final int height = 20;
     public static final int dimension = 20;
 
+    //Creating JFrame and setting Dimensions for the Applet
+    
     public Game() {
         window = new JFrame();
 
@@ -19,7 +21,6 @@ public class Game {
         window.setSize(width * dimension, height * dimension);
         window.setVisible(true);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
 
     }
 }
