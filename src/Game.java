@@ -27,17 +27,55 @@ implements KeyListener{
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-        
-    }
+    public void keyTyped(KeyEvent e) { }
 
     @Override
     public void keyPressed(KeyEvent e) {
+        int KeyCode = e.getKeyCode();
 
+        if(KeyCode == KeyEvent.VK_W ) {
+            player.Up();
+
+        }
+        else if(KeyCode == KeyEvent.VK_S ) {
+            player.Down();
+
+        }
+
+        else if(KeyCode == KeyEvent.VK_A ) {
+            player.Left();
+
+        }
+        else{
+            player.Right();
+
+        }
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyReleased(KeyEvent e) { }
 
+    public Snake getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Snake player) {
+        this.player = player;
+    }
+
+    public Food getFood() {
+        return food;
+    }
+
+    public void setFood(Food food) {
+        this.food = food;
+    }
+
+    public JFrame getWindow() {
+        return window;
+    }
+
+    public void setWindow(JFrame window) {
+        this.window = window;
     }
 }

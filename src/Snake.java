@@ -9,6 +9,8 @@ public class Snake {
     private int d = Game.dimension;
 
 
+    private String move;
+
     //initialize Snake
     //This is the class is the starting point for snake
 
@@ -22,6 +24,8 @@ public class Snake {
         temp = new Rectangle(d,d);
         temp.setLocation((w / 2 - 2) * d, (h / 2 -2) * d);
         body.add(temp);
+
+        move = "Nothing";
     }
 
     public ArrayList<Rectangle> getBody() {
@@ -31,6 +35,23 @@ public class Snake {
     public void setBody(ArrayList<Rectangle> body) {
         this.body = body;
     }
+
+    public void Up() {
+        move = "Up";
+    }
+
+    public void Down() {
+        move = "Down";
+    }
+
+    public void Left() {
+        move = "Left";
+    }
+
+    public void Right() {
+        move = "Right";
+    }
+
 
 
 
