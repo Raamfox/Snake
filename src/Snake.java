@@ -10,6 +10,7 @@ public class Snake {
 
 
     //initialize Snake
+    //This is the class is the starting point for snake
 
     public Snake () {
         body = new ArrayList<>();
@@ -30,7 +31,7 @@ public class Snake {
     public void setBody(ArrayList<Rectangle> body) {
         this.body = body;
     }
-    //hej
+
 
 
 }
