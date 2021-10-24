@@ -1,7 +1,9 @@
 import javax.swing.*;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
 
-public class Game {
-//add keylisteners
+public class Game
+implements KeyListener{
     private Snake player;
     private Food food;
     private Graphics graphics;
@@ -21,6 +23,21 @@ public class Game {
         window.setSize(width * dimension, height * dimension);
         window.setVisible(true);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
 
     }
 }
