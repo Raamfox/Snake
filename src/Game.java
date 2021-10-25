@@ -43,7 +43,6 @@ implements KeyListener{
             player.Down();
 
         }
-
         else if(KeyCode == KeyEvent.VK_A ) {
             player.Left();
 
