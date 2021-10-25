@@ -1,4 +1,5 @@
-import javax.swing.*;
+import javax.swing.JFrame;
+
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
@@ -10,8 +11,8 @@ implements KeyListener{
 
     private JFrame window;
 
-    public static final int width = 20;
-    public static final int height = 20;
+    public static final int width = 40;
+    public static final int height = 40;
     public static final int dimension = 20;
 
     //Creating JFrame and setting Dimensions for the Applet
@@ -29,6 +30,7 @@ implements KeyListener{
     @Override
     public void keyTyped(KeyEvent e) { }
 
+    //Initializing player input
     @Override
     public void keyPressed(KeyEvent e) {
         int KeyCode = e.getKeyCode();
@@ -55,6 +57,7 @@ implements KeyListener{
     @Override
     public void keyReleased(KeyEvent e) { }
 
+    //Getters and setters
     public Snake getPlayer() {
         return player;
     }

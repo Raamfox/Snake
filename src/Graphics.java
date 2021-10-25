@@ -1,4 +1,4 @@
-import javax.swing.*;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import java.awt.Graphics2D;
@@ -8,32 +8,33 @@ import java.awt.event.ActionListener;
 public class Graphics
 extends JPanel
 implements ActionListener {
-    private  Timer t = new Timer(100,this);
+    private  Timer timer = new Timer(100,this);
     public String state;
 
-    private Snake s;
-    private Food f;
+    private Snake snake;
+    private Food food;
     private Game game;
 
     public Graphics(Game g) {
-        t.start();
+        timer.start();
         state = "Start";
 
         game = g;
-        s = game.getPlayer();
-        f = game.getFood();
+        snake = game.getPlayer();
+        food = game.getFood();
 
         this.addKeyListener(g);
         this.setFocusable(true);
         this.setFocusTraversalKeysEnabled(false);
     }
 
+    //repaint every time you move
     public void PaintComponent(java.awt.Graphics g){
         super.paintComponent(g);
 
         Graphics2D g2d = (Graphics2D) g;
 
-
+        g2d
     }
 
     @Override
