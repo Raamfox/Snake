@@ -1,14 +1,15 @@
-import javax.swing.*;
-import javax.swing.Timer;
-
-import java.awt.Graphics2D;
+import java.awt.Color;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
 public class Graphics
-extends JPanel
-implements ActionListener {
-    private  Timer t = new Timer(100,this);
+        extends JPanel
+        implements ActionListener{
+    private Timer t = new Timer(100, this);
     public String state;
 
     private Snake s;
@@ -20,25 +21,48 @@ implements ActionListener {
         state = "Start";
 
         game = g;
-        s = game.getPlayer();
-        f = game.getFood();
+        s = g.getPlayer();
+        f = g.getFood();
 
+        //add a keyListner
         this.addKeyListener(g);
         this.setFocusable(true);
         this.setFocusTraversalKeysEnabled(false);
     }
 
-    public void PaintComponent(java.awt.Graphics g){
+    public void paintComponent(java.awt.Graphics g) {
         super.paintComponent(g);
 
         Graphics2D g2d = (Graphics2D) g;
 
+        g2d.setColor(Color.black);
+        g2d.fillRect(0, 0, Game.width * Game.dimension + 5, Game.height * Game.dimension + 5);
 
+        if(state == "Start") {
+            g2d.setColor(Color.white);
+            g2d.drawString("Press Any Key", Game.width/2 * Game.dimension - 40, Game.height / 2 * Game.dimension - 20);
+        }
+        else if(state == "Running") {
+            g2d.setColor(Color.red);
+            g2d.fillRect(f.getX() * Game.dimension, f.getY() * Game.dimension, Game.dimension, Game.dimension);
+
+            g2d.setColor(Color.blue);
+            for(Rectangle r : s.getBody()) {
+                g2d.fill(r);
+            }
+        }
+        //make unit test here about scoreboard
+        else {
+            g2d.setColor(Color.white);
+            g2d.drawString("Your Score: " + (s.getBody().size() -3 ), Game.width/2 * Game.dimension - 40, Game.height / 2 * Game.dimension - 20);
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
-
+        game.update();
     }
+
 }
+

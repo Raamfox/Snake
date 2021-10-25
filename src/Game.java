@@ -1,59 +1,116 @@
-import javax.swing.*;
-import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import javax.swing.JFrame;
 
 public class Game
-implements KeyListener{
+        implements KeyListener {
     private Snake player;
     private Food food;
     private Graphics graphics;
 
     private JFrame window;
 
-    public static final int width = 20;
-    public static final int height = 20;
+    public static final int width = 40;
+    public static final int height = 40;
     public static final int dimension = 20;
 
-    //Creating JFrame and setting Dimensions for the Applet
-    
     public Game() {
         window = new JFrame();
 
+        player = new Snake();
+
+        food = new Food(player);
+
+        graphics = new Graphics(this);
+
+        window.add(graphics);
+
         window.setTitle("Snake");
-        window.setSize(width * dimension, height * dimension);
+        window.setSize(width * dimension + 2, height * dimension + dimension + 4);//how does dimensions work in JFrame
         window.setVisible(true);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
 
+    public void start() {
+        graphics.state = "Running";
+    }
+
+    public void update() {
+        if(graphics.state == "Running") {
+            if(check_food_collision()) {
+                player.grow();
+                food.random_spawn(player);
+            }
+            else if(check_wall_collision() || check_self_collision()) {
+                graphics.state = "End";
+            }
+            else {
+                player.move();
+            }
+        }
+    }
+
+    //make unit test here
+    private boolean check_wall_collision() {
+        if(player.getX() < 0 || player.getX() >= width * dimension
+                || player.getY() < 0|| player.getY() >= height * dimension) {
+            return true;
+        }
+        return false;
+    }
+
+    //make unit test here
+    private boolean check_food_collision() {
+        if(player.getX() == food.getX() * dimension && player.getY() == food.getY() * dimension) {
+            return true;
+        }
+        return false;
+    }
+
+    //make unit test here
+    private boolean check_self_collision() {
+        for(int i = 1; i < player.getBody().size(); i++) {
+            if(player.getX() == player.getBody().get(i).x &&
+                    player.getY() == player.getBody().get(i).y) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
-    public void keyTyped(KeyEvent e) { }
+    public void keyTyped(KeyEvent e) {	}
 
     @Override
     public void keyPressed(KeyEvent e) {
-        int KeyCode = e.getKeyCode();
 
-        if(KeyCode == KeyEvent.VK_W ) {
-            player.Up();
+        int keyCode = e.getKeyCode();
 
+        if(graphics.state == "Running") {
+            if(keyCode == KeyEvent.VK_W && player.getMove() != "Down") {
+                player.up();
+            }
+
+            if(keyCode == KeyEvent.VK_S && player.getMove() != "Up") {
+                player.down();
+            }
+
+            if(keyCode == KeyEvent.VK_A && player.getMove() != "Right") {
+                player.left();
+            }
+
+            if(keyCode == KeyEvent.VK_D && player.getMove() != "Left") {
+                player.right();
+            }
         }
-        else if(KeyCode == KeyEvent.VK_S ) {
-            player.Down();
-
-        }
-
-        else if(KeyCode == KeyEvent.VK_A ) {
-            player.Left();
-
-        }
-        else{
-            player.Right();
-
+        else {
+            this.start();
         }
     }
 
     @Override
-    public void keyReleased(KeyEvent e) { }
+    public void keyReleased(KeyEvent e) {	}
 
     public Snake getPlayer() {
         return player;
@@ -78,4 +135,5 @@ implements KeyListener{
     public void setWindow(JFrame window) {
         this.window = window;
     }
+
 }

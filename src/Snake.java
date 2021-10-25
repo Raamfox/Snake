@@ -3,56 +3,106 @@ import java.util.ArrayList;
 
 public class Snake {
     private ArrayList<Rectangle> body;
-
     private int w = Game.width;
     private int h = Game.height;
     private int d = Game.dimension;
 
+    private String move; //NOTHING, UP, DOWN, LEFT, RIGHT
 
-    private String move;
-
-    //initialize Snake
-    //This is the class is the starting point for snake
-
-    public Snake () {
+    public Snake() {
         body = new ArrayList<>();
 
         Rectangle temp = new Rectangle(Game.dimension, Game.dimension);
         temp.setLocation(Game.width / 2 * Game.dimension, Game.height / 2 * Game.dimension);
         body.add(temp);
 
-        temp = new Rectangle(d,d);
-        temp.setLocation((w / 2 - 2) * d, (h / 2 -2) * d);
+        temp = new Rectangle(d, d);
+        temp.setLocation((w / 2 - 1) * d, (h / 2) * d);
+        body.add(temp);
+
+        temp = new Rectangle(d, d);
+        temp.setLocation((w / 2 - 2) * d, (h / 2) * d);
         body.add(temp);
 
         move = "Nothing";
+    }
+
+    public void move() {
+        if(move != "Nothing") {
+            Rectangle first = body.get(0);
+
+            Rectangle temp = new Rectangle(Game.dimension, Game.dimension);
+
+            if(move == "Up") {
+                temp.setLocation(first.x, first.y - Game.dimension);
+            }
+            else if(move == "Down") {
+                temp.setLocation(first.x, first.y + Game.dimension);
+            }
+            else if(move == "Left") {
+                temp.setLocation(first.x - Game.dimension, first.y);
+            }
+            else{
+                temp.setLocation(first.x + Game.dimension, first.y);
+            }
+
+            body.add(0, temp);
+            body.remove(body.size()-1);
+        }
+    }
+
+    public void grow() {
+        Rectangle first = body.get(0);
+
+        Rectangle temp = new Rectangle(Game.dimension, Game.dimension);
+
+        if(move == "Up") {
+            temp.setLocation(first.x, first.y - Game.dimension);
+        }
+        else if(move == "Down") {
+            temp.setLocation(first.x, first.y + Game.dimension);
+        }
+        else if(move == "Left") {
+            temp.setLocation(first.x - Game.dimension, first.y);
+        }
+        else{
+            temp.setLocation(first.x + Game.dimension, first.y);
+        }
+
+        body.add(0, temp);
     }
 
     public ArrayList<Rectangle> getBody() {
         return body;
     }
 
+
     public void setBody(ArrayList<Rectangle> body) {
         this.body = body;
     }
 
-    public void Up() {
+    public int getX() {
+        return body.get(0).x;
+    }
+
+    public int getY() {
+        return body.get(0).y ;
+    }
+
+    public String getMove() {
+        return move;
+    }
+
+    public void up() {
         move = "Up";
     }
-
-    public void Down() {
+    public void down() {
         move = "Down";
     }
-
-    public void Left() {
+    public void left() {
         move = "Left";
     }
-
-    public void Right() {
+    public void right() {
         move = "Right";
     }
-
-
-
-
 }
