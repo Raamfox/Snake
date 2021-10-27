@@ -83,6 +83,13 @@ public class Snake {
         this.snakeBody = snakeBody;
     }
 
+    public int getXPos(){
+        return snakeBody.get(0).x;
+    }
+    public int getYPos(){
+        return snakeBody.get(0).y;
+    }
+
     public void Up() {
         move = "Up";
     }

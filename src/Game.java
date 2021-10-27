@@ -26,6 +26,30 @@ implements KeyListener{
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
+    public boolean checkWallCollision(){
+        if(player.getXPos() < 0 || player.getXPos() >= width * dimension
+                || player.getYPos() <0 || player.getYPos() >= height * dimension){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkFoodCollision(){
+        if(player.getXPos() == food.getX() * dimension && player.getYPos() == food.getY() * dimension){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkSelfCollision(){
+        for(int i = 1; 1 < player.getSnakeBody().size();++i){
+            if(player.getXPos() == player.getSnakeBody().get(i).x && player.getYPos() == player.getSnakeBody().get(i).y){
+
+            }
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public void keyTyped(KeyEvent e) { }
