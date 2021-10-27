@@ -20,13 +20,39 @@ implements KeyListener{
     public Game() {
         window = new JFrame();
 
+        player = new Snake();
+        food = new Food(player);
+        graphics = new Graphics(this);
+
+        window.add(graphics);
+
+
         window.setTitle("Snake");
         window.setSize(width * dimension, height * dimension);
         window.setVisible(true);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
-    public boolean checkWallCollision(){
+    public void start() {
+        graphics.state ="Running";
+    }
+
+    public void update () {
+        if(graphics.state == "Running") {
+            if(checkWallCollision()){
+                player.grow();
+                food.randomSpawn(player);
+            }
+            else if (checkWallCollision() || checkSelfCollision()) {
+                graphics.state = "End";
+            }
+            else {
+                player.move();
+            }
+        }
+    }
+
+    private boolean checkWallCollision(){
         if(player.getXPos() < 0 || player.getXPos() >= width * dimension
                 || player.getYPos() <0 || player.getYPos() >= height * dimension){
             return true;
@@ -34,14 +60,14 @@ implements KeyListener{
         return false;
     }
 
-    public boolean checkFoodCollision(){
-        if(player.getXPos() == food.getX() * dimension && player.getYPos() == food.getY() * dimension){
+    private boolean checkFoodCollision(){
+        if(player.getXPos() == food.getXFoodPos() * dimension && player.getYPos() == food.getYFoodPos() * dimension){
             return true;
         }
         return false;
     }
 
-    public boolean checkSelfCollision(){
+    private boolean checkSelfCollision(){
         for(int i = 1; 1 < player.getSnakeBody().size();++i){
             if(player.getXPos() == player.getSnakeBody().get(i).x && player.getYPos() == player.getSnakeBody().get(i).y){
 
@@ -59,23 +85,26 @@ implements KeyListener{
     public void keyPressed(KeyEvent e) {
         int KeyCode = e.getKeyCode();
 
-        if(KeyCode == KeyEvent.VK_W ) {
-            player.Up();
+        if(graphics.state == "Running") {
+            if (KeyCode == KeyEvent.VK_W) {
+                player.Up();
 
+            } else if (KeyCode == KeyEvent.VK_S) {
+                player.Down();
+
+            } else if (KeyCode == KeyEvent.VK_A) {
+                player.Left();
+
+            } else {
+                player.Right();
+            }
         }
-        else if(KeyCode == KeyEvent.VK_S ) {
-            player.Down();
-
-        }
-        else if(KeyCode == KeyEvent.VK_A ) {
-            player.Left();
-
-        }
-        else{
-            player.Right();
-
+        else {
+            this.start();
         }
     }
+
+
 
     @Override
     public void keyReleased(KeyEvent e) { }

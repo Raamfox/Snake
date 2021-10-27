@@ -27,14 +27,14 @@ public class Food {
            }
        }
     }
-    public int getX() {
+    public int getXFoodPos() {
         return x;
     }
 
     public void setX(int x) {
         this.x = x;
     }
-    public int getY() {
+    public int getYFoodPos() {
         return y;
     }
 

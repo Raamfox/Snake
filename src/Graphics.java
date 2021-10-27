@@ -40,18 +40,31 @@ implements ActionListener {
         g2d.setColor(Color.black);
         g2d.fillRect(0,0, Game.width * Game.dimension, Game.height * Game.dimension);
 
-        g2d.setColor(Color.red);
-        g2d.fillRect(food.getX()* Game.dimension,food.getY() * Game.dimension, Game.dimension, Game.dimension);
+        if(state == "Start"){
+            g2d.setColor(Color.white);
+            g2d.drawString("Press Any Key", Game.width/ 2 * Game.dimension - 40, Game.height / 2 * Game.dimension -20);
+        }
+        else if (state == "Running"){
+            g2d.setColor(Color.red);
+            g2d.fillRect(food.getXFoodPos()* Game.dimension,food.getYFoodPos() * Game.dimension, Game.dimension, Game.dimension);
 
-        g2d.setColor(Color.blue);
-        for(Rectangle rectangle: snake.getSnakeBody()){
-            g2d.fill(rectangle);
+            g2d.setColor(Color.blue);
+            for(Rectangle rectangle: snake.getSnakeBody()) {
+                g2d.fill(rectangle);
+            }
+        }
+        else{
+            g2d.setColor(Color.white);
+            g2d.drawString("Your score:" + (snake.getSnakeBody().size()-3), Game.width/ 2 * Game.dimension - 40, Game.height / 2 * Game.dimension -20);
+
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
+        game.update();
+
 
     }
 }
