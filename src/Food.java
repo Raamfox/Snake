@@ -15,10 +15,11 @@ public class Food {
     //initializing random spawn for food
     public void randomSpawn(Snake player) {
 
-       boolean onSnake = false;
-       while (!onSnake) {
-           x = (int)(Math.random() * Game.width);
-           y = (int)(Math.random() * Game.height);
+       boolean onSnake = true;
+       while (onSnake) {
+           onSnake = false;
+           x = (int)(Math.random() * Game.width -1);
+           y = (int)(Math.random() * Game.height -1);
 
            for (Rectangle rectangle : player.getSnakeBody()){
                if (rectangle.x == x && rectangle.y == y) {
@@ -27,14 +28,14 @@ public class Food {
            }
        }
     }
-    public int getXFoodPos() {
+    public int getX() {
         return x;
     }
 
     public void setX(int x) {
         this.x = x;
     }
-    public int getYFoodPos() {
+    public int getY() {
         return y;
     }
 

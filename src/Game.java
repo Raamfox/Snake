@@ -28,18 +28,19 @@ implements KeyListener{
 
 
         window.setTitle("Snake");
-        window.setSize(width * dimension, height * dimension);
+        window.setSize(width * dimension +2, height * dimension + dimension + 4);
         window.setVisible(true);
+        window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
     public void start() {
-        graphics.state ="Running";
+        graphics.state = "Running";
     }
 
     public void update () {
-        if(graphics.state == "Running") {
-            if(checkWallCollision()){
+        if(graphics.state.equals("Running")) {
+            if(checkFoodCollision()){
                 player.grow();
                 food.randomSpawn(player);
             }
@@ -53,26 +54,25 @@ implements KeyListener{
     }
 
     private boolean checkWallCollision(){
-        if(player.getXPos() < 0 || player.getXPos() >= width * dimension
-                || player.getYPos() <0 || player.getYPos() >= height * dimension){
+        if(player.getX() < 0 || player.getX() >= width * dimension
+                || player.getY() <0 || player.getY() >= height * dimension){
             return true;
         }
         return false;
     }
 
     private boolean checkFoodCollision(){
-        if(player.getXPos() == food.getXFoodPos() * dimension && player.getYPos() == food.getYFoodPos() * dimension){
+        if(player.getX() == food.getX() * dimension && player.getY() == food.getY() * dimension){
             return true;
         }
         return false;
     }
 
     private boolean checkSelfCollision(){
-        for(int i = 1; 1 < player.getSnakeBody().size();++i){
-            if(player.getXPos() == player.getSnakeBody().get(i).x && player.getYPos() == player.getSnakeBody().get(i).y){
-
+        for(int i = 1; i < player.getSnakeBody().size();++i){
+            if(player.getX() == player.getSnakeBody().get(i).x && player.getY() == player.getSnakeBody().get(i).y){
+                return true;
             }
-            return true;
         }
         return false;
     }
@@ -85,17 +85,17 @@ implements KeyListener{
     public void keyPressed(KeyEvent e) {
         int KeyCode = e.getKeyCode();
 
-        if(graphics.state == "Running") {
-            if (KeyCode == KeyEvent.VK_W) {
+        if(graphics.state.equals("Running")) {
+            if (KeyCode == KeyEvent.VK_W && !player.getMove().equals("Down")) {
                 player.Up();
-
-            } else if (KeyCode == KeyEvent.VK_S) {
-                player.Down();
-
-            } else if (KeyCode == KeyEvent.VK_A) {
-                player.Left();
-
-            } else {
+            }
+             if (KeyCode == KeyEvent.VK_S && !player.getMove().equals("Up")) {
+                 player.Down();
+             }
+             if (KeyCode == KeyEvent.VK_A && !player.getMove().equals("Right")) {
+                 player.Left();
+             }
+             if (KeyCode == KeyEvent.VK_D && !player.getMove().equals("Left")){
                 player.Right();
             }
         }
