@@ -32,21 +32,21 @@ implements ActionListener {
     }
 
     //Setting the colors for the game
-    public void PaintComponent(java.awt.Graphics g){
+    public void paintComponent(java.awt.Graphics g){
         super.paintComponent(g);
 
         Graphics2D g2d = (Graphics2D) g;
 
         g2d.setColor(Color.black);
-        g2d.fillRect(0,0, Game.width * Game.dimension, Game.height * Game.dimension);
+        g2d.fillRect(0,0, Game.width * Game.dimension +5, Game.height * Game.dimension +5);
 
-        if(state == "Start"){
+        if(state.equals("Start")){
             g2d.setColor(Color.white);
-            g2d.drawString("Press Any Key", Game.width/ 2 * Game.dimension - 40, Game.height / 2 * Game.dimension -20);
+            g2d.drawString("Press Any Key To Start", Game.width/ 2 * Game.dimension - 40, Game.height / 2 * Game.dimension -20);
         }
-        else if (state == "Running"){
+        else if (state.equals("Running")){
             g2d.setColor(Color.red);
-            g2d.fillRect(food.getXFoodPos()* Game.dimension,food.getYFoodPos() * Game.dimension, Game.dimension, Game.dimension);
+            g2d.fillRect(food.getX()* Game.dimension,food.getY() * Game.dimension, Game.dimension, Game.dimension);
 
             g2d.setColor(Color.blue);
             for(Rectangle rectangle: snake.getSnakeBody()) {
@@ -55,7 +55,7 @@ implements ActionListener {
         }
         else{
             g2d.setColor(Color.white);
-            g2d.drawString("Your score:" + (snake.getSnakeBody().size()-3), Game.width/ 2 * Game.dimension - 40, Game.height / 2 * Game.dimension -20);
+            g2d.drawString("Your score:" + (snake.getSnakeBody().size() -3), Game.width/ 2 * Game.dimension - 40, Game.height / 2 * Game.dimension -20);
 
         }
     }

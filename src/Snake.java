@@ -22,7 +22,11 @@ public class Snake {
         snakeBody.add(temp);
 
         temp = new Rectangle(gameDimension, gameDimension);
-        temp.setLocation((gameWidth / 2 - 2) * gameDimension, (gameHeight / 2 -2) * gameDimension);
+        temp.setLocation((gameWidth / 2 - 1) * gameDimension, (gameHeight / 2 ) * gameDimension);
+        snakeBody.add(temp);
+
+        temp = new Rectangle(gameDimension, gameDimension);
+        temp.setLocation((gameWidth / 2 - 2) * gameDimension, (gameHeight / 2 ) * gameDimension);
         snakeBody.add(temp);
 
         move = "Nothing";
@@ -30,17 +34,17 @@ public class Snake {
 
     //Move function
     public void move () {
-        if(move != "Nothing"){
+        if(!move.equals("Nothing")){
             Rectangle first = snakeBody.get(0);
             Rectangle temp = new Rectangle(Game.dimension, Game.dimension);
 
-            if(move == "Up"){
+            if(move.equals("Up")){
                 temp.setLocation(first.x, first.y - Game.dimension);
             }
-            else if(move == "Down") {
+            else if(move.equals("Down")) {
                 temp.setLocation(first.x, first.y + Game.dimension);
             }
-            else if(move == "Left") {
+            else if(move.equals("Left")) {
                 temp.setLocation(first.x - Game.dimension, first.y);
             }
             else{
@@ -57,13 +61,13 @@ public class Snake {
         Rectangle first = snakeBody.get(0);
         Rectangle temp = new Rectangle(Game.dimension, Game.dimension);
 
-        if(move == "Up"){
+        if(move.equals("Up")){
             temp.setLocation(first.x, first.y - Game.dimension);
         }
-        else if(move == "Down") {
+        else if(move.equals("Down")) {
             temp.setLocation(first.x, first.y + Game.dimension);
         }
-        else if(move == "Left") {
+        else if(move.equals("Left")) {
             temp.setLocation(first.x - Game.dimension, first.y);
         }
         else{
@@ -71,8 +75,6 @@ public class Snake {
         }
 
         snakeBody.add(0, temp);
-
-
     }
 
     public ArrayList<Rectangle> getSnakeBody() {
@@ -83,30 +85,30 @@ public class Snake {
         this.snakeBody = snakeBody;
     }
 
-    public int getXPos(){
+    public String getMove(){
+        return move;
+    }
+
+    public int getX(){
         return snakeBody.get(0).x;
     }
-    public int getYPos(){
+    public int getY(){
         return snakeBody.get(0).y;
     }
 
     public void Up() {
-        move = "Up";
+            move = "Up";
     }
 
     public void Down() {
-        move = "Down";
+            move = "Down";
     }
 
     public void Left() {
-        move = "Left";
+            move = "Left";
     }
 
     public void Right() {
-        move = "Right";
-    }
-
-
-
+            move = "Right";}
 
 }
