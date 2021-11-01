@@ -2,35 +2,110 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 public class Snake {
-    private ArrayList<Rectangle> body;
+    private ArrayList<Rectangle> snakeBody;
 
-    private int w = Game.width;
-    private int h = Game.height;
-    private int d = Game.dimension;
+    private int gameWidth = Game.width;
+    private int gameHeight = Game.height;
+    private int gameDimension = Game.dimension;
 
+
+    private String move;
 
     //initialize Snake
-    //This is the class is the starting point for snake
+    //Setting starting point for snake
 
     public Snake () {
-        body = new ArrayList<>();
+        snakeBody = new ArrayList<>();
 
         Rectangle temp = new Rectangle(Game.dimension, Game.dimension);
         temp.setLocation(Game.width / 2 * Game.dimension, Game.height / 2 * Game.dimension);
-        body.add(temp);
+        snakeBody.add(temp);
 
-        temp = new Rectangle(d,d);
-        temp.setLocation((w / 2 - 2) * d, (h / 2 -2) * d);
-        body.add(temp);
+        temp = new Rectangle(gameDimension, gameDimension);
+        temp.setLocation((gameWidth / 2 - 2) * gameDimension, (gameHeight / 2 -2) * gameDimension);
+        snakeBody.add(temp);
+
+        move = "Nothing";
     }
 
-    public ArrayList<Rectangle> getBody() {
-        return body;
+    //Move function
+    public void move () {
+        if(move != "Nothing"){
+            Rectangle first = snakeBody.get(0);
+            Rectangle temp = new Rectangle(Game.dimension, Game.dimension);
+
+            if(move == "Up"){
+                temp.setLocation(first.x, first.y - Game.dimension);
+            }
+            else if(move == "Down") {
+                temp.setLocation(first.x, first.y + Game.dimension);
+            }
+            else if(move == "Left") {
+                temp.setLocation(first.x - Game.dimension, first.y);
+            }
+            else{
+                temp.setLocation(first.x + Game.dimension, first.y);
+            }
+
+            snakeBody.add(0, temp);
+            snakeBody.remove(snakeBody.size()-1);
+        }
     }
 
-    public void setBody(ArrayList<Rectangle> body) {
-        this.body = body;
+    //Grow function
+    public void grow () {
+        Rectangle first = snakeBody.get(0);
+        Rectangle temp = new Rectangle(Game.dimension, Game.dimension);
+
+        if(move == "Up"){
+            temp.setLocation(first.x, first.y - Game.dimension);
+        }
+        else if(move == "Down") {
+            temp.setLocation(first.x, first.y + Game.dimension);
+        }
+        else if(move == "Left") {
+            temp.setLocation(first.x - Game.dimension, first.y);
+        }
+        else{
+            temp.setLocation(first.x + Game.dimension, first.y);
+        }
+
+        snakeBody.add(0, temp);
+
+
     }
+
+    public ArrayList<Rectangle> getSnakeBody() {
+        return snakeBody;
+    }
+
+    public void setSnakeBody(ArrayList<Rectangle> snakeBody) {
+        this.snakeBody = snakeBody;
+    }
+
+    public int getXPos(){
+        return snakeBody.get(0).x;
+    }
+    public int getYPos(){
+        return snakeBody.get(0).y;
+    }
+
+    public void Up() {
+        move = "Up";
+    }
+
+    public void Down() {
+        move = "Down";
+    }
+
+    public void Left() {
+        move = "Left";
+    }
+
+    public void Right() {
+        move = "Right";
+    }
+
 
 
 
