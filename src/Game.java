@@ -26,7 +26,6 @@ implements KeyListener{
 
         window.add(graphics);
 
-
         window.setTitle("Snake");
         window.setSize(width * dimension +2, height * dimension + dimension + 4);
         window.setVisible(true);
@@ -51,6 +50,14 @@ implements KeyListener{
                 player.move();
             }
         }
+    }
+
+    public static boolean checkWallCollision2(Snake snake){
+        if(snake.getX() < 0 || snake.getX() >= width * dimension
+                || snake.getY() <0 || snake.getY() >= height * dimension){
+            return true;
+        }
+        return false;
     }
 
     private boolean checkWallCollision(){
