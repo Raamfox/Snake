@@ -10,7 +10,7 @@ public class TestCheckCollision {
         boolean collisionResult = Game.checkWallCollision2(player);
         System.out.println(player);
         System.out.println(collisionResult);
-        assertEquals(false,collisionResult);
+        assertFalse(collisionResult);
 
     }
 }

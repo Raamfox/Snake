@@ -43,7 +43,7 @@ implements KeyListener{
                 player.grow();
                 food.randomSpawn(player);
             }
-            else if (checkWallCollision() || checkSelfCollision()) {
+            else if (checkWallCollision2(player) || checkSelfCollision()) {
                 graphics.state = "End";
             }
             else {
@@ -59,14 +59,14 @@ implements KeyListener{
         }
         return false;
     }
-
+/*
     private boolean checkWallCollision(){
         if(player.getX() < 0 || player.getX() >= width * dimension
                 || player.getY() <0 || player.getY() >= height * dimension){
             return true;
         }
         return false;
-    }
+    }*/
 
     private boolean checkFoodCollision(){
         if(player.getX() == food.getX() * dimension && player.getY() == food.getY() * dimension){
