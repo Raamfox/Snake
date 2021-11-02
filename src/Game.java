@@ -1,5 +1,4 @@
 import javax.swing.JFrame;
-
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
@@ -8,15 +7,14 @@ implements KeyListener{
     private Snake player;
     private Food food;
     private Graphics graphics;
-
     private JFrame window;
 
+    //Creating JFrame and setting Dimensions
     public static final int width = 40;
     public static final int height = 40;
     public static final int dimension = 20;
 
-    //Creating JFrame and setting Dimensions for the Applet
-    
+
     public Game() {
         window = new JFrame();
 
@@ -43,7 +41,7 @@ implements KeyListener{
                 player.grow();
                 food.randomSpawn(player);
             }
-            else if (checkWallCollision2(player) || checkSelfCollision()) {
+            else if (checkWallCollision() || checkSelfCollision()) {
                 graphics.state = "End";
             }
             else {
@@ -52,21 +50,13 @@ implements KeyListener{
         }
     }
 
-    public static boolean checkWallCollision2(Snake snake){
-        if(snake.getX() < 0 || snake.getX() >= width * dimension
-                || snake.getY() <0 || snake.getY() >= height * dimension){
-            return true;
-        }
-        return false;
-    }
-/*
     private boolean checkWallCollision(){
         if(player.getX() < 0 || player.getX() >= width * dimension
                 || player.getY() <0 || player.getY() >= height * dimension){
             return true;
         }
         return false;
-    }*/
+    }
 
     private boolean checkFoodCollision(){
         if(player.getX() == food.getX() * dimension && player.getY() == food.getY() * dimension){
@@ -111,33 +101,15 @@ implements KeyListener{
         }
     }
 
-
-
     @Override
     public void keyReleased(KeyEvent e) { }
 
-    //Getters and setters
+    //Getters
     public Snake getPlayer() {
         return player;
     }
 
-    public void setPlayer(Snake player) {
-        this.player = player;
-    }
-
     public Food getFood() {
         return food;
-    }
-
-    public void setFood(Food food) {
-        this.food = food;
-    }
-
-    public JFrame getWindow() {
-        return window;
-    }
-
-    public void setWindow(JFrame window) {
-        this.window = window;
     }
 }
