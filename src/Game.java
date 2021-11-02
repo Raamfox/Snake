@@ -1,5 +1,4 @@
 import javax.swing.JFrame;
-
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
@@ -8,15 +7,14 @@ implements KeyListener{
     private Snake player;
     private Food food;
     private Graphics graphics;
-
     private JFrame window;
 
+    //Creating JFrame and setting Dimensions
     public static final int width = 40;
     public static final int height = 40;
     public static final int dimension = 20;
 
-    //Creating JFrame and setting Dimensions for the Applet
-    
+
     public Game() {
         window = new JFrame();
 
@@ -25,7 +23,6 @@ implements KeyListener{
         graphics = new Graphics(this);
 
         window.add(graphics);
-
 
         window.setTitle("Snake");
         window.setSize(width * dimension +2, height * dimension + dimension + 4);
@@ -104,33 +101,15 @@ implements KeyListener{
         }
     }
 
-
-
     @Override
     public void keyReleased(KeyEvent e) { }
 
-    //Getters and setters
+    //Getters
     public Snake getPlayer() {
         return player;
     }
 
-    public void setPlayer(Snake player) {
-        this.player = player;
-    }
-
     public Food getFood() {
         return food;
-    }
-
-    public void setFood(Food food) {
-        this.food = food;
-    }
-
-    public JFrame getWindow() {
-        return window;
-    }
-
-    public void setWindow(JFrame window) {
-        this.window = window;
     }
 }

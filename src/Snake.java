@@ -8,8 +8,7 @@ public class Snake {
     private int gameHeight = Game.height;
     private int gameDimension = Game.dimension;
 
-
-    private String move;
+    public String move;
 
     //initialize Snake
     //Setting starting point for snake
@@ -81,10 +80,6 @@ public class Snake {
         return snakeBody;
     }
 
-    public void setSnakeBody(ArrayList<Rectangle> snakeBody) {
-        this.snakeBody = snakeBody;
-    }
-
     public String getMove(){
         return move;
     }
@@ -92,6 +87,7 @@ public class Snake {
     public int getX(){
         return snakeBody.get(0).x;
     }
+
     public int getY(){
         return snakeBody.get(0).y;
     }
@@ -109,6 +105,7 @@ public class Snake {
     }
 
     public void Right() {
-            move = "Right";}
+            move = "Right";
+    }
 
 }
